@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class UserDetail implements Serializable {
+
     private Integer id;
     private String realName;
     private String tel;

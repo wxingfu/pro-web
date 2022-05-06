@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class UserBasic implements Serializable {
+
     private Integer id;
     private String loginId;
     private String nickName;

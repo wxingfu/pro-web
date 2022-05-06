@@ -15,7 +15,6 @@ public class TopicController {
 
     public String topicDetail(Integer id, HttpSession session) {
         Topic topic = topicService.getTopicById(id);
-
         session.setAttribute("topic", topic);
         return "frames/detail";
     }

@@ -22,8 +22,7 @@ public class ReplyServiceImpl implements ReplyService {
     @Override
     public List<Reply> getReplyListByTopicId(Integer topicId) {
         List<Reply> replyList = replyDAO.getReplyList(new Topic(topicId));
-        for (int i = 0; i < replyList.size(); i++) {
-            Reply reply = replyList.get(i);
+        for (Reply reply : replyList) {
             //1.将关联的作者设置进去
             UserBasic author = userBasicService.getUserBasicById(reply.getAuthor().getId());
             reply.setAuthor(author);

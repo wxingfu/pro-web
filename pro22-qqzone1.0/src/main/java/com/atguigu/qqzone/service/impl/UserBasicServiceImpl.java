@@ -13,8 +13,7 @@ public class UserBasicServiceImpl implements UserBasicService {
 
     @Override
     public UserBasic login(String loginId, String pwd) {
-        UserBasic userBasic = userBasicDAO.getUserBasic(loginId, pwd);
-        return userBasic;
+        return userBasicDAO.getUserBasic(loginId, pwd);
     }
 
     @Override

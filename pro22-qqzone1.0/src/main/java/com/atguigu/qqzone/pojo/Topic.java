@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Topic implements Serializable {
+
     private Integer id;
     private String title;
     private String content;

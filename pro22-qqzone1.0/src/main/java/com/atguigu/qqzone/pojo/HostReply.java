@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class HostReply implements Serializable {
+
     private Integer id;
     private String content;
     private LocalDateTime hostReplyDate;
