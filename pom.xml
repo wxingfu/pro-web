@@ -29,6 +29,7 @@
         <module>pro18-servlet-api</module>
         <module>pro19-filter-listener</module>
         <module>pro20-fruit2.3-mvc-transaction</module>
+        <module>pro21-qqzone1.0</module>
     </modules>
 
     <packaging>pom</packaging>
