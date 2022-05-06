@@ -6,6 +6,7 @@ import com.atguigu.qqzone.pojo.Topic;
 import java.util.List;
 
 public interface ReplyDAO {
+
     //获取指定日志的回复列表
     List<Reply> getReplyList(Topic topic);
 

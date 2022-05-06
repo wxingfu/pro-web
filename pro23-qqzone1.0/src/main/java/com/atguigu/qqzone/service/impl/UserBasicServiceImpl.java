@@ -21,8 +21,7 @@ public class UserBasicServiceImpl implements UserBasicService {
     public List<UserBasic> getFriendList(UserBasic userBasic) {
         List<UserBasic> userBasicList = userBasicDAO.getUserBasicList(userBasic);
         List<UserBasic> friendList = new ArrayList<>(userBasicList.size());
-        for (int i = 0; i < userBasicList.size(); i++) {
-            UserBasic friend = userBasicList.get(i);
+        for (UserBasic friend : userBasicList) {
             friend = userBasicDAO.getUserBasicById(friend.getId());
             friendList.add(friend);
         }

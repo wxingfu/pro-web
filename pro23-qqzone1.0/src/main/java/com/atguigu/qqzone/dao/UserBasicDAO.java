@@ -5,6 +5,7 @@ import com.atguigu.qqzone.pojo.UserBasic;
 import java.util.List;
 
 public interface UserBasicDAO {
+
     //根据账号和密码获取特定用户信息
     public UserBasic getUserBasic(String loginId, String pwd);
 

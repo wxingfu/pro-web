@@ -1,20 +1,22 @@
 package com.atguigu.qqzone.controller;
 
-import com.atguigu.qqzone.pojo.Reply;
 import com.atguigu.qqzone.pojo.Topic;
 import com.atguigu.qqzone.pojo.UserBasic;
-import com.atguigu.qqzone.service.ReplyService;
 import com.atguigu.qqzone.service.TopicService;
 
 import javax.servlet.http.HttpSession;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class TopicController {
 
     private TopicService topicService;
+
+    public String addTopic(String title, String content, HttpSession session) {
+        //从session中获取当前用户信息
+        UserBasic userBasic = (UserBasic) session.getAttribute("userBasic");
+        topicService.addTopicByAuthor(userBasic, title, content);
+        return "redirect:topic.do?operate=getTopicList";
+    }
 
     public String topicDetail(Integer id, HttpSession session) {
         Topic topic = topicService.getTopicById(id);

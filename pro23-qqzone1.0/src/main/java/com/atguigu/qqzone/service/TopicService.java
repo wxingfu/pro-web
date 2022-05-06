@@ -17,4 +17,6 @@ public interface TopicService {
 
     //删除特定的topic
     void delTopic(Integer id);
+
+    boolean addTopicByAuthor(UserBasic author, String title, String content);
 }

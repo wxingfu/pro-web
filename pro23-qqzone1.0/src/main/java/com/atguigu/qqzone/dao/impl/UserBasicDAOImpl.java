@@ -7,6 +7,7 @@ import com.atguigu.qqzone.pojo.UserBasic;
 import java.util.List;
 
 public class UserBasicDAOImpl extends BaseDAO<UserBasic> implements UserBasicDAO {
+
     @Override
     public UserBasic getUserBasic(String loginId, String pwd) {
         return super.load("select * from t_user_basic where loginId = ? and pwd = ? ", loginId, pwd);

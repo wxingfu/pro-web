@@ -19,7 +19,6 @@ import java.util.Map;
 public class ClassPathXmlApplicationContext implements BeanFactory {
 
     private Map<String, Object> beanMap = new HashMap<>();
-    private String path = "applicationContext.xml";
 
     public ClassPathXmlApplicationContext() {
         this("applicationContext.xml");

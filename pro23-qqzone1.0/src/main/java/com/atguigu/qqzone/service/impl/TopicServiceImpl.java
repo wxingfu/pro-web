@@ -8,11 +8,13 @@ import com.atguigu.qqzone.service.ReplyService;
 import com.atguigu.qqzone.service.TopicService;
 import com.atguigu.qqzone.service.UserBasicService;
 
+import java.util.Date;
 import java.util.List;
 
 public class TopicServiceImpl implements TopicService {
 
     private TopicDAO topicDAO = null;
+
     //此处引用的是replyService，而不是replyDAO
     private ReplyService replyService;
     private UserBasicService userBasicService;
@@ -41,11 +43,21 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public boolean addTopicByAuthor(UserBasic author, String title, String content) {
+        Topic topic = new Topic();
+        topic.setAuthor(author);
+        topic.setTitle(title);
+        topic.setTopicDate(new Date());
+        topic.setContent(content);
+        topicDAO.addTopic(topic);
+        return true;
+    }
+
+    @Override
     public Topic getTopicById(Integer id) {
         Topic topic = getTopic(id);
         List<Reply> replyList = replyService.getReplyListByTopicId(topic.getId());
         topic.setReplyList(replyList);
-
         return topic;
     }
 }
