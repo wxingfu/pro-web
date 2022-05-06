@@ -2,7 +2,10 @@ package com.atguigu.myssm.basedao;
 
 import java.lang.reflect.*;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public abstract class BaseDAO<T> {
@@ -103,8 +106,7 @@ public abstract class BaseDAO<T> {
         return "java.lang.Integer".equals(typeName)
                 || "java.lang.String".equals(typeName)
                 || "java.util.Date".equals(typeName)
-                || "java.sql.Date".equals(typeName)
-                || "java.time.LocalDateTime".equals(typeName);
+                || "java.sql.Date".equals(typeName);
     }
 
     private static boolean isMyType(String typeName) {
@@ -163,6 +165,9 @@ public abstract class BaseDAO<T> {
                 for (int i = 0; i < columnCount; i++) {
                     String columnName = rsmd.getColumnName(i + 1);            //fid   fname   price
                     Object columnValue = rs.getObject(i + 1);     //33    苹果      5
+                    if (columnValue instanceof LocalDateTime) {
+                        columnValue = localDateTimeToDate((LocalDateTime) columnValue);
+                    }
                     setValue(entity, columnName, columnValue);
                 }
                 return entity;
@@ -197,6 +202,9 @@ public abstract class BaseDAO<T> {
                 for (int i = 0; i < columnCount; i++) {
                     String columnName = rsmd.getColumnLabel(i + 1);            //fid   fname   price
                     Object columnValue = rs.getObject(i + 1);     //33    苹果      5
+                    if (columnValue instanceof LocalDateTime) {
+                        columnValue = localDateTimeToDate((LocalDateTime) columnValue);
+                    }
                     setValue(entity, columnName, columnValue);
                 }
                 list.add(entity);
@@ -207,4 +215,9 @@ public abstract class BaseDAO<T> {
         }
         return list;
     }
+
+    public Date localDateTimeToDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
 }

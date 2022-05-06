@@ -1,7 +1,7 @@
 package com.atguigu.qqzone.pojo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class Topic implements Serializable {
@@ -9,7 +9,7 @@ public class Topic implements Serializable {
     private Integer id;
     private String title;
     private String content;
-    private LocalDateTime topicDate;
+    private Date topicDate;
     private UserBasic author;          //M:1
 
     private List<Reply> replyList;     //1:N
@@ -19,6 +19,15 @@ public class Topic implements Serializable {
 
     public Topic(Integer id) {
         this.id = id;
+    }
+
+    public Topic(Integer id, String title, String content, Date topicDate, UserBasic author, List<Reply> replyList) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.topicDate = topicDate;
+        this.author = author;
+        this.replyList = replyList;
     }
 
     public Integer getId() {
@@ -45,11 +54,11 @@ public class Topic implements Serializable {
         this.content = content;
     }
 
-    public LocalDateTime getTopicDate() {
+    public Date getTopicDate() {
         return topicDate;
     }
 
-    public void setTopicDate(LocalDateTime topicDate) {
+    public void setTopicDate(Date topicDate) {
         this.topicDate = topicDate;
     }
 

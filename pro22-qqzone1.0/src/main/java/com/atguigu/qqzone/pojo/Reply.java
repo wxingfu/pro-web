@@ -1,13 +1,13 @@
 package com.atguigu.qqzone.pojo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Reply implements Serializable {
 
     private Integer id;
     private String content;
-    private LocalDateTime replyDate;
+    private Date replyDate;
     private UserBasic author;  //M:1
     private Topic topic;       //M:1
 
@@ -20,7 +20,16 @@ public class Reply implements Serializable {
         this.id = id;
     }
 
-    public Reply(String content, LocalDateTime replyDate, UserBasic author, Topic topic) {
+    public Reply(Integer id, String content, Date replyDate, UserBasic author, Topic topic, HostReply hostReply) {
+        this.id = id;
+        this.content = content;
+        this.replyDate = replyDate;
+        this.author = author;
+        this.topic = topic;
+        this.hostReply = hostReply;
+    }
+
+    public Reply(String content, Date replyDate, UserBasic author, Topic topic) {
         this.content = content;
         this.replyDate = replyDate;
         this.author = author;
@@ -43,11 +52,11 @@ public class Reply implements Serializable {
         this.content = content;
     }
 
-    public LocalDateTime getReplyDate() {
+    public Date getReplyDate() {
         return replyDate;
     }
 
-    public void setReplyDate(LocalDateTime replyDate) {
+    public void setReplyDate(Date replyDate) {
         this.replyDate = replyDate;
     }
 

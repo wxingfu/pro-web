@@ -79,19 +79,9 @@ public class ClassPathXmlApplicationContext implements BeanFactory {
                     }
                 }
             }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+            System.out.println("IOC控制反转和DI依赖注入完成");
+        } catch (ParserConfigurationException | IOException | IllegalAccessException | InstantiationException |
+                 ClassNotFoundException | NoSuchFieldException | SAXException e) {
             e.printStackTrace();
         }
     }
