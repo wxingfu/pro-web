@@ -32,6 +32,7 @@
         <module>pro21-qqzone1.0</module>
         <module>pro22-qqzone1.0</module>
         <module>pro23-qqzone1.0</module>
+        <module>pro24-book</module>
     </modules>
 
     <packaging>pom</packaging>
