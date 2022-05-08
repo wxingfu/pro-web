@@ -1,11 +1,11 @@
 package com.atguigu.myssm.basedao;
 
+import com.atguigu.myssm.util.DateUtil;
+
 import java.lang.reflect.*;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public abstract class BaseDAO<T> {
@@ -78,22 +78,25 @@ public abstract class BaseDAO<T> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DAOException("BaseDAO executeUpdate出错了");
+        } finally {
+            try {
+                rs.close();
+                psmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     //通过反射技术给obj对象的property属性赋propertyValue值
     private void setValue(Object obj, String property, Object propertyValue) throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException {
         Class<?> clazz = obj.getClass();
-
         //获取property这个字符串对应的属性名 ， 比如 "fid"  去找 obj对象中的 fid 属性
         Field field = clazz.getDeclaredField(property);
-
         //获取当前字段的类型名称
         String typeName = field.getType().getName();
         //判断如果是自定义类型，则需要调用这个自定义类的带一个参数的构造方法，创建出这个自定义的实例对象，然后将实例对象赋值给这个属性
-
         if (isMyType(typeName)) {
-            //假设typeName是"com.atguigu.qqzone.pojo.UserBasic"
             Class<?> typeNameClass = Class.forName(typeName);
             Constructor<?> constructor = typeNameClass.getDeclaredConstructor(Integer.class);
             propertyValue = constructor.newInstance(propertyValue);
@@ -140,6 +143,13 @@ public abstract class BaseDAO<T> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DAOException("BaseDAO executeComplexQuery出错了");
+        } finally {
+            try {
+                rs.close();
+                psmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
@@ -152,10 +162,8 @@ public abstract class BaseDAO<T> {
             psmt = conn.prepareStatement(sql);
             setParams(psmt, params);
             rs = psmt.executeQuery();
-
             //通过rs可以获取结果集的元数据
             //元数据：描述结果集数据的数据 , 简单讲，就是这个结果集有哪些列，什么类型等等
-
             ResultSetMetaData rsmd = rs.getMetaData();
             //获取结果集的列数
             int columnCount = rsmd.getColumnCount();
@@ -167,7 +175,7 @@ public abstract class BaseDAO<T> {
                     String columnName = rsmd.getColumnName(i + 1);            //fid   fname   price
                     Object columnValue = rs.getObject(i + 1);     //33    苹果      5
                     if (columnValue instanceof LocalDateTime) {
-                        columnValue = localDateTimeToDate((LocalDateTime) columnValue);
+                        columnValue = DateUtil.localDateTimeToDate((LocalDateTime) columnValue);
                     }
                     setValue(entity, columnName, columnValue);
                 }
@@ -176,6 +184,13 @@ public abstract class BaseDAO<T> {
         } catch (Exception e) {
             e.printStackTrace();
             throw new DAOException("BaseDAO load出错了");
+        } finally {
+            try {
+                rs.close();
+                psmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return null;
@@ -204,7 +219,7 @@ public abstract class BaseDAO<T> {
                     String columnName = rsmd.getColumnLabel(i + 1);            //fid   fname   price
                     Object columnValue = rs.getObject(i + 1);     //33    苹果      5
                     if (columnValue instanceof LocalDateTime) {
-                        columnValue = localDateTimeToDate((LocalDateTime) columnValue);
+                        columnValue = DateUtil.localDateTimeToDate((LocalDateTime) columnValue);
                     }
                     setValue(entity, columnName, columnValue);
                 }
@@ -213,12 +228,15 @@ public abstract class BaseDAO<T> {
         } catch (Exception e) {
             e.printStackTrace();
             throw new DAOException("BaseDAO executeQuery出错了");
+        } finally {
+            try {
+                rs.close();
+                psmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return list;
-    }
-
-    public Date localDateTimeToDate(LocalDateTime localDateTime) {
-        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }

@@ -106,7 +106,7 @@ public abstract class BaseDAO<T> {
                 || "java.lang.String".equals(typeName)
                 || "java.util.Date".equals(typeName)
                 || "java.sql.Date".equals(typeName)
-                || "java.time.LocalDateTime".equals(typeName);
+                || "java.lang.Double".equals(typeName);
     }
 
     private static boolean isMyType(String typeName) {
