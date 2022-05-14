@@ -36,6 +36,8 @@
         <module>pro25-book</module>
         <module>pro26-cookie-kaptcha-js</module>
         <module>pro27-book-regist-cart</module>
+        <module>pro28-vue-axios-json</module>
+        <module>pro29-book-cart-vue-axios</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -69,6 +71,11 @@
                 <groupId>com.github.penggle</groupId>
                 <artifactId>kaptcha</artifactId>
                 <version>2.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.2.4</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
